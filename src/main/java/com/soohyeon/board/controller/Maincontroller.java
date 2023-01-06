@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.soohyeon.board.dto.HelloDto;
+import com.soohyeon.board.dto.response.ResponseDto;
 
 // Response로 HTML을 반환하는 Controller가 아닌
 // Response Body에 직접 데이터를 담아서 응답하는 Controller
@@ -36,24 +37,24 @@ public class Maincontroller {
 
 	@GetMapping(HELLO)
 	// @RequestParam(name=", value="",required=true, defaultValue="")
-    // : URL로 데이터를 받는 경우 (Get, Delete) 쿼리 형태로 데이터를 받음
-    // http:// 호스트:포트/end-point?name=value&...
-	public String getHello(@RequestParam(name="name", required=false, defaultValue="james") String name) {
+	// : URL로 데이터를 받는 경우 (Get, Delete) 쿼리 형태로 데이터를 받음
+	// http:// 호스트:포트/end-point?name=value&...
+	public String getHello(@RequestParam(name = "name", required = false, defaultValue = "james") String name) {
 		return "This is get method, end-point '/hello'" + name;
 	}
+
 	@GetMapping(HELLO + "/{name}/spring")
 	// @PathVariable(path) : URL 데이터를 받는 경우 (Get, Delete) path 형태로 데이터를 받음
 	// http:// 호스트:포트/end-point/VARIABLE
 	public String getHelloName(@PathVariable("name") String name) {
 		return "This is get method, end-point '/hello'" + name;
 	}
-	
 
 	// @PostMapping(end-point) : 해당 end-point로 Post 방식의 Request가 왔을 때 동작
 	@PostMapping(HELLO)
-    // @RequestBody : 해당 Request의 Body에서 JSON을 인식해 인스턴스로 변경
-	public HelloDto postHello(@RequestBody HelloDto requestBody) {
-		return requestBody;
+	// @RequestBody : 해당 Request의 Body에서 JSON을 인식해 인스턴스로 변경
+	public ResponseDto<HelloDto> postHello(@RequestBody HelloDto requestBody) {
+		return ResponseDto.setSuccess("hello", requestBody);
 	}
 
 	// @PutMapping(end-point) : 해당 end-point로 put 방식의 Request 왔을 때 동작
