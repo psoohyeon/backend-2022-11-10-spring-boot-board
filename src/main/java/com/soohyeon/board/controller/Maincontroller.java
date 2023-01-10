@@ -26,8 +26,8 @@ import com.soohyeon.board.dto.response.ResponseDto;
 public class Maincontroller {
 
 	static final String HELLO = "hello";
-	// http방식:// 호스트:포트/~ (/~ : end-point)
-	// http:// localhost:4040/~~~
+	// http방식://호스트:포트/~ (/~ : end-point)
+	// http://localhost:4040/~~~
 
 	// @GetMapping(end-point) : 해당 end-point로 Get 방식의 Request가 왔을 때 동작
 	@GetMapping("")
@@ -39,6 +39,7 @@ public class Maincontroller {
 	// @RequestParam(name=", value="",required=true, defaultValue="")
 	// : URL로 데이터를 받는 경우 (Get, Delete) 쿼리 형태로 데이터를 받음
 	// http:// 호스트:포트/end-point?name=value&...
+	// html형태를 위해 사용 
 	public String getHello(@RequestParam(name = "name", required = false, defaultValue = "james") String name) {
 		return "This is get method, end-point '/hello'" + name;
 	}
